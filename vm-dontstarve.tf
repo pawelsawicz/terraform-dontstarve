@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "dontstarve" {
-    ami = "ami-4f8bb438"
+    ami = "ami-cb4986bc"
     instance_type = "t1.micro"
 }
 
