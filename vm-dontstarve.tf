@@ -7,6 +7,30 @@ provider "aws" {
 resource "aws_instance" "dontstarve" {
     ami = "ami-cb4986bc"
     instance_type = "t1.micro"
+
+    provisioner "file" {
+        source = "/provisioning/provision_user.sh"
+        destination = "/tmp/provisioning/provision_user.sh"
+    }
+
+    provisioner "file" {
+        source = "/provisioning/provision_dontstarve.sh"
+        destination = "/tmp/provisioning/provision_dontstarve.sh"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+          "chmod +x /tmp/provisioning/provision_user.sh",
+          "/tmp/provisioning/provision_user.sh"
+        ]
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+          "chmod +x /tmp/provisioning/provision_dontstarve.sh",
+          "/tmp/provisioning/provision_dontstarve.sh"
+        ]
+    }
 }
 
 resource "aws_security_group" "dontstarve_port" {
