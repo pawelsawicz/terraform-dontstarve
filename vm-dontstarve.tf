@@ -7,28 +7,48 @@ provider "aws" {
 resource "aws_instance" "dontstarve" {
     ami = "ami-cb4986bc"
     instance_type = "t1.micro"
+    key_name = "dontstarve"
 
-    provisioner "file" {
-        source = "/provisioning/provision_user.sh"
-        destination = "/tmp/provisioning/provision_user.sh"
+    connection {
+        user = "ubuntu"
+        key_file = "~/Downloads/dontstarve.pem"
+    }
+
+    provisioner "remote-exec" {
+      inline = "mkdir -p ~/tmp/provisioning"
     }
 
     provisioner "file" {
-        source = "/provisioning/provision_dontstarve.sh"
-        destination = "/tmp/provisioning/provision_dontstarve.sh"
+        source = "./provisioning/provision_user.sh"
+        destination = "~/tmp/provisioning/provision_user.sh"
+    }
+
+    provisioner "file" {
+        source = "./provisioning/provision_dontstarve.sh"
+        destination = "~/tmp/provisioning/provision_dontstarve.sh"
     }
 
     provisioner "remote-exec" {
         inline = [
-          "chmod +x /tmp/provisioning/provision_user.sh",
-          "/tmp/provisioning/provision_user.sh"
+          "chmod +x ~/tmp/provisioning/provision_user.sh",
+          "~/tmp/provisioning/provision_user.sh"
         ]
     }
 
+    provisioner "file" {
+        source = "./config/server_token.txt"
+        destination = "/home/steam/.klei/DoNotStarveTogether/server_token.txt"
+    }
+
+    provisioner "file" {
+        source = "./config/settings.ini"
+        destination = "/home/steam/.klei/DoNotStarveTogether/settings.ini"
+    }
+
     provisioner "remote-exec" {
         inline = [
-          "chmod +x /tmp/provisioning/provision_dontstarve.sh",
-          "/tmp/provisioning/provision_dontstarve.sh"
+          "chmod +x ~/tmp/provisioning/provision_dontstarve.sh",
+          "~/tmp/provisioning/provision_dontstarve.sh"
         ]
     }
 }

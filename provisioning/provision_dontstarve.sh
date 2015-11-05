@@ -23,15 +23,15 @@ echo "Packages have been installed"
 echo "Configurating user"
 #sudo useradd -m steam
 #sudo chmod a+rw `tty`
-sudo su - steam
+#sudo su - steam
 sudo mkdir /home/steam/steamcmd
 cd /home/steam/steamcmd
 echo "Downloading steam"
-wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
+sudo wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 echo "Extracting steam"
-tar -xvzf steamcmd_linux.tar.gz
+sudo tar -xvzf steamcmd_linux.tar.gz
 echo "Install & configure steam"
-./steamcmd.sh steamcmd +login anonymous +force_install_dir /home/steam/steamapps/DST +app_update 343050 +validate +quit
+sudo ./steamcmd.sh steamcmd +login anonymous +force_install_dir /home/steam/steamapps/DST +app_update 343050 +validate +quit
 echo "Quit from steam console"
 echo "Check out folder to server"
 cd /home/steam/steamapps/DST/bin/
