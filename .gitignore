@@ -2,3 +2,4 @@
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
+config/server_token.txt
