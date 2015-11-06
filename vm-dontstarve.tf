@@ -8,7 +8,8 @@ resource "aws_instance" "dontstarve" {
     ami = "ami-cb4986bc"
     instance_type = "t1.micro"
     key_name = "dontstarve"
-    security_groups = ["${aws_security_group.dontstarve_port.id}"]
+    security_groups = ["${aws_security_group.dontstarve_port.name}"]
+
     connection {
         user = "ubuntu"
         key_file = "~/Downloads/dontstarve.pem"
@@ -17,7 +18,7 @@ resource "aws_instance" "dontstarve" {
     provisioner "remote-exec" {
       inline = "mkdir -p ~/tmp/provisioning"
     }
-/*
+
     provisioner "file" {
         source = "./provisioning/provision_user.sh"
         destination = "~/tmp/provisioning/provision_user.sh"
@@ -50,7 +51,7 @@ resource "aws_instance" "dontstarve" {
           "chmod +x ~/tmp/provisioning/provision_dontstarve.sh",
           "~/tmp/provisioning/provision_dontstarve.sh"
         ]
-    }*/
+    }
 }
 
 resource "aws_security_group" "dontstarve_port" {
