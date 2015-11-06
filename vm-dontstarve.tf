@@ -8,7 +8,7 @@ resource "aws_instance" "dontstarve" {
     ami = "ami-cb4986bc"
     instance_type = "t1.micro"
     key_name = "dontstarve"
-    security_groups = ["${aws_security_group.dontstarve_port.name}"]
+    security_groups = ["${aws_security_group.dontstarve_port.id}"]
 
     connection {
         user = "ubuntu"
