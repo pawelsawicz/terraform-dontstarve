@@ -37,12 +37,12 @@ resource "aws_instance" "dontstarve" {
 
     provisioner "file" {
         source = "./config/server_token.txt"
-        destination = "/home/steam/.klei/DoNotStarveTogether/server_token.txt"
+        destination = "~/.klei/DoNotStarveTogether/server_token.txt"
     }
 
     provisioner "file" {
         source = "./config/settings.ini"
-        destination = "/home/steam/.klei/DoNotStarveTogether/settings.ini"
+        destination = "~/.klei/DoNotStarveTogether/settings.ini"
     }
 
     provisioner "remote-exec" {

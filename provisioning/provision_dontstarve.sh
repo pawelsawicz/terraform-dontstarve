@@ -21,19 +21,16 @@ then
 fi
 echo "Packages have been installed"
 echo "Configurating user"
-#sudo useradd -m steam
-#sudo chmod a+rw `tty`
-#sudo su - steam
-sudo mkdir /home/steam/steamcmd
-cd /home/steam/steamcmd
+mkdir ~/steamcmd
+cd ~/steamcmd
 echo "Downloading steam"
-sudo wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
+wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 echo "Extracting steam"
-sudo tar -xvzf steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
 echo "Install & configure steam"
-sudo ./steamcmd.sh steamcmd +login anonymous +force_install_dir /home/steam/steamapps/DST +app_update 343050 +validate +quit
+./steamcmd.sh steamcmd +login anonymous +force_install_dir ~/steamapps/DST +app_update 343050 +quit
 echo "Quit from steam console"
 echo "Check out folder to server"
-cd /home/steam/steamapps/DST/bin/
+cd ~/steamapps/DST/bin/
 echo "Runs DST Server"
-su -c ./dontstarve_dedicated_server_nullrenderer -s /bin/sh steam
+screen -S "DST Server" ./dontstarve_dedicated_server_nullrenderer
